@@ -1,0 +1,21 @@
+version: "3.4"
+
+services:
+  api:
+    image: mclukastr/docker-wpf-exercise
+    # build:
+    #   context: .
+    #   dockerfile: API/Dockerfile
+    environment:
+      - "ConnectionStrings__DefaultConnection=Server=db,1433;Database=eCar;User Id=sa; Password=yourStrong(!)Password;"
+    depends_on:
+      - db
+    ports:
+      - 8080:80
+  db:
+    image: mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=yourStrong(!)Password
+    ports:
+      - 1433:1433
